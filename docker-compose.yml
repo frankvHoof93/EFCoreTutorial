@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb/server:10.3
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+    ports:
+      - 3306:3306
+
+  commander:
+    container_name: commander
+    image: eftut/commander
+    depends_on:
+      - mariadb
+    build:
+      context: Commander
+    ports:
+      - 5000:80
